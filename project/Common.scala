@@ -29,10 +29,7 @@ object Common {
             s"""apk update &&
                |apk add bash &&
                |rm -rf /tmp/* &&
-               |rm -rf /var/cache/apk/*""".stripMargin.replaceAll(System.lineSeparator(), " ")),
-          Cmd("RUN", "mv /opt/docker/docs /docs"),
-          Cmd("RUN", "mv /opt/docker/scalastyle-1.0.0-with-id.jar /opt/docker/scalastyle.jar"))
-      //ExecCmd("RUN", Seq("chown", "-R", s"$dockerUser:$dockerGroup", "/docs"): _*))
+               |rm -rf /var/cache/apk/*""".stripMargin.replaceAll(System.lineSeparator(), " ")))
 
       case other => List(other)
     })
