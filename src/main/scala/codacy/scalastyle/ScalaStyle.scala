@@ -57,9 +57,16 @@ object ScalaStyle extends MetricsTool {
       Directory.getFiles(mc.inputEncoding, mc.directories.map(new java.io.File(_)), excludedFiles = mc.excludedFiles)
     val messages = new ScalastyleChecker(urlClassLoaderOpt).checkFiles(configuration, fileSpecs)
 
-    messages.collect {
+    val methodComplexities = messages.collect {
       case StyleError(file, _, _, _, complexityStr :: _, _, _, _) =>
         (file.name, Try(complexityStr.toInt).toOption)
     }
+
+    val complexitiesByFile = methodComplexities.groupBy { case (filename, _) => filename }
+
+    complexitiesByFile.map {
+      case (_, complexities) =>
+        complexities.maxBy { case (_, complexity) => complexity.getOrElse(0) }
+    }(collection.breakOut)
   }
 }
