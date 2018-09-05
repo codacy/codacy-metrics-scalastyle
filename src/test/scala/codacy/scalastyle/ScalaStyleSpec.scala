@@ -10,7 +10,7 @@ class ScalaStyleSpec extends Specification {
 
   val dummyScalaFileMetrics =
     FileMetrics("codacy/metrics/DummyScalaFile.scala", complexity = Some(2))
-  val loggerFileMetrics = FileMetrics("codacy/metrics/Logger.scala", complexity = Some(3))
+  val loggerFileMetrics = FileMetrics("codacy/metrics/JLineHistory.scala", complexity = Some(3))
 
   val targetDir = "src/test/resources"
 
