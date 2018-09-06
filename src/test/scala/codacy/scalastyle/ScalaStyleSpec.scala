@@ -1,7 +1,7 @@
 package codacy.scalastyle
 
-import codacy.docker.api.Source
-import codacy.docker.api.metrics.FileMetrics
+import com.codacy.plugins.api.Source
+import com.codacy.plugins.api.metrics.FileMetrics
 import org.specs2.mutable.Specification
 
 import scala.util.Success
