@@ -18,7 +18,7 @@ object ScalaStyle extends MetricsTool {
                      files: Option[Set[Source.File]],
                      options: Map[Options.Key, Options.Value]): Try[List[FileMetrics]] = {
 
-    val filesToLint = files.map(_.map(file => source.path + "/" + file.path)).getOrElse(Set(source.path))
+    val filesToLint = files.map(_.map(_.path)).getOrElse(Set(source.path))
 
     val config = MainConfig(error = false, directories = filesToLint.toList)
 
