@@ -5,7 +5,7 @@ import java.nio.file.Paths
 
 import better.files.File
 import com.codacy.plugins.api.languages.Language
-import com.codacy.plugins.api.metrics.{FileMetrics, MetricsTool}
+import com.codacy.plugins.api.metrics.{FileMetrics, LineComplexity, MetricsTool}
 import com.codacy.plugins.api.{Options, Source}
 import org.scalastyle._
 
@@ -24,12 +24,11 @@ object ScalaStyle extends MetricsTool {
 
     Try {
       fileComplexities(config).map {
-        case (file, complexity) =>
+        case (file, complexity, lineComplexities) =>
           val filePath = relativize(source.path, file)
-          FileMetrics(filePath, complexity)
+          FileMetrics(filePath, complexity, lineComplexities = lineComplexities)
       }
     }
-
   }
 
   private def relativize(sourcePath: String, filePath: String): String = {
@@ -38,7 +37,7 @@ object ScalaStyle extends MetricsTool {
     srcFolder.relativize(file).toString
   }
 
-  private def fileComplexities(mc: MainConfig): List[(String, Option[Int])] = {
+  private def fileComplexities(mc: MainConfig): List[(String, Option[Int], Set[LineComplexity])] = {
     val configuration = ScalastyleConfiguration.readFromString(
       """
         |<scalastyle commentFilter="enabled">
@@ -58,15 +57,19 @@ object ScalaStyle extends MetricsTool {
     val messages = new ScalastyleChecker(urlClassLoaderOpt).checkFiles(configuration, fileSpecs)
 
     val methodComplexities = messages.collect {
-      case StyleError(file, _, _, _, complexityStr :: _, _, _, _) =>
-        (file.name, Try(complexityStr.toInt).toOption)
+      case StyleError(file, _, _, _, complexityStr :: _, line, _, _) =>
+        (file.name, Try(complexityStr.toInt).toOption, line)
     }
 
-    val complexitiesByFile = methodComplexities.groupBy { case (filename, _) => filename }
+    val complexitiesByFile = methodComplexities.groupBy { case (filename, _, _) => filename }
 
     complexitiesByFile.map {
-      case (_, complexities) =>
-        complexities.maxBy { case (_, complexity) => complexity.getOrElse(0) }
+      case (filename, complexities) =>
+        val maximum = complexities.collect { case (_, Some(complexity), _) => complexity }.reduceOption(_ max _)
+        val lineComplexities: Set[LineComplexity] = complexities.collect {
+          case (_, Some(complexity), Some(line)) => LineComplexity(line, complexity)
+        }(collection.breakOut)
+        (filename, maximum, lineComplexities)
     }(collection.breakOut)
   }
 }
