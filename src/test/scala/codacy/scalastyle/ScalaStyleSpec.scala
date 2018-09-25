@@ -3,7 +3,7 @@ package codacy.scalastyle
 import better.files.File
 import com.codacy.plugins.api.Source
 import com.codacy.plugins.api.languages.Languages.Scala
-import com.codacy.plugins.api.metrics.FileMetrics
+import com.codacy.plugins.api.metrics.{FileMetrics, LineComplexity}
 import org.specs2.mutable.Specification
 
 import scala.util.Success
@@ -13,8 +13,15 @@ class ScalaStyleSpec extends Specification {
   val targetDir = File("src/test/resources")
 
   val dummyScalaFileMetrics =
-    FileMetrics("codacy/metrics/DummyScalaFile.scala", complexity = Some(2))
-  val loggerFileMetrics = FileMetrics("codacy/metrics/JLineHistory.scala", complexity = Some(3))
+    FileMetrics(
+      "codacy/metrics/DummyScalaFile.scala",
+      complexity = Some(2),
+      lineComplexities = Set(LineComplexity(6, 2)))
+
+  val loggerFileMetrics = FileMetrics(
+    "codacy/metrics/JLineHistory.scala",
+    complexity = Some(3),
+    lineComplexities = Set(LineComplexity(51, 3), LineComplexity(70, 2), LineComplexity(76, 2)))
 
   "ScalaStyle" should {
     "get complexity" in {
