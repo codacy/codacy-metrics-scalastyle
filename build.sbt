@@ -32,9 +32,7 @@ dockerCommands := dockerCommands.value.flatMap {
     List(
       Cmd("RUN", "adduser -u 2004 -D docker"),
       cmd,
-      Cmd(
-        "RUN",
-        s"apk update && apk --no-cache add bash"),
+      Cmd("RUN", s"apk update && apk --no-cache add bash"),
       Cmd("RUN", "mv /opt/docker/docs /docs"))
 
   case other => List(other)
