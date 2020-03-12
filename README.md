@@ -1,7 +1,7 @@
 # codacy-metrics-scalastyle
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/88b2abcf178c4d50a3e2b2a49b5fc32a)](https://www.codacy.com/app/Codacy/codacy-metrics-scalastyle?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=codacy/codacy-metrics-scalastyle&amp;utm_campaign=Badge_Grade)
-[![Codacy Badge](https://api.codacy.com/project/badge/Coverage/88b2abcf178c4d50a3e2b2a49b5fc32a)](https://www.codacy.com/app/Codacy/codacy-metrics-scalastyle?utm_source=github.com&utm_medium=referral&utm_content=codacy/codacy-metrics-scalastyle&utm_campaign=Badge_Coverage)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/88b2abcf178c4d50a3e2b2a49b5fc32a)](https://www.codacy.com/gh/codacy/codacy-metrics-scalastyle?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=codacy/codacy-metrics-scalastyle&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Coverage/88b2abcf178c4d50a3e2b2a49b5fc32a)](https://www.codacy.com/gh/codacy/codacy-metrics-scalastyle?utm_source=github.com&utm_medium=referral&utm_content=codacy/codacy-metrics-scalastyle&utm_campaign=Badge_Coverage)
 [![CircleCI](https://circleci.com/gh/codacy/codacy-metrics-scalastyle.svg?style=svg)](https://circleci.com/gh/codacy/codacy-metrics-scalastyle)
 [![Docker Version](https://images.microbadger.com/badges/version/codacy/codacy-metrics-scalastyle.svg)](https://microbadger.com/images/codacy/codacy-metrics-scalastyle "Get your own version badge on microbadger.com")
 
