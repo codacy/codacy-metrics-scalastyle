@@ -7,7 +7,7 @@ scalaVersion := "2.12.10"
 name := "codacy-metrics-scalastyle"
 // App Dependencies
 libraryDependencies ++= Seq(
-  "com.codacy" %% "codacy-metrics-scala-seed" % "0.2.0",
+  "com.codacy" %% "codacy-metrics-scala-seed" % "0.2.2",
   "com.github.pathikrit" %% "better-files" % "3.8.0",
   "org.specs2" %% "specs2-core" % "4.8.0" % Test)
 
