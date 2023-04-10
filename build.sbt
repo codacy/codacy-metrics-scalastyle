@@ -23,7 +23,7 @@ mappings in Universal ++= {
 }.value
 
 Docker / packageName := packageName.value
-dockerBaseImage := "amazoncorretto:8-alpine3.16-jre"
+dockerBaseImage := "amazoncorretto:8-alpine3.17-jre"
 Docker / daemonUser := "docker"
 Docker / daemonGroup := "docker"
 dockerEntrypoint := Seq(s"/opt/docker/bin/${name.value}")
